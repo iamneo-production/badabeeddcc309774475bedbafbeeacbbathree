@@ -22,6 +22,16 @@ jobs:
           java-version: 17
       - name: Move Pom.xml to Root
         run: mv .github/workflows/pom.xml ./pom.xml
+
+      - name: Check Commit Message
+        run: |
+          if [[ "$(git log --format=%B -n 1)" == *"Submit-project-save-commit"* ]]; then
+            echo "Commit message contains 'Submit-project-save-commit', proceeding with the workflow."
+          else
+            echo "Commit message does not contain 'Submit-project-save-commit', skipping the workflow."
+            exit 78  # Exiting with a non-zero code to indicate skipping
+          fi
+          
       - name: Build and analyze
         env:
           GITHUB_TOKEN: badabeeddcc309774475bedbafbeeacbbathree
