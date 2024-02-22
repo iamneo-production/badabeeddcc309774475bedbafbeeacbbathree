@@ -20,6 +20,14 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17
+      - name: Check Commit Message
+        run: |
+          if [[ "${{ github.event.head_commit.message }}" == *"Submit project save commit"* ]]; then
+            echo 'Submit project save commit executed!'
+          else
+            echo 'Commit message does not contain "Submit project save commit". Exiting...'
+            exit 1
+          fi
       - name: Move Pom.xml to Root
         run: mv .github/workflows/pom.xml ./pom.xml
       - name: Build and analyze
