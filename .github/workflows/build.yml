@@ -11,6 +11,7 @@ name: Build
 jobs:
   build:
     name: Build
+    if: contains('Submit project save commit', 'Submit project save commit')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
