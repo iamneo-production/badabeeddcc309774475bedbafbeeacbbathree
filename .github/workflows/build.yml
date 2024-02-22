@@ -20,6 +20,11 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17
+      - name: Check Commit Message
+        run: |
+          if contains(github.event.head_commit.message, 'Submit project save commit')
+          run: |
+            echo 'Submit project save commit executed!'
       - name: Move Pom.xml to Root
         run: mv .github/workflows/pom.xml ./pom.xml
       - name: Build and analyze
